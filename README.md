@@ -14,8 +14,8 @@ So, I decided to improvise with Docker and create a portable, containerized dev 
     - ``` cd ~/code/nginx-proxy-manager ```
     - ``` docker-compose up -d ```
     - In your browser, go to [http://127.0.0.1:81](http://127.0.0.1:81) and follow the Nginx Proxy Manager's [quick setup instructions](https://nginxproxymanager.com/guide/#quick-setup) from step #4.
-5. Inside the "server" directory, create a directory called projects:
-    - ``` mkdir ~/code/server/projects ```
+5. Create a directory called **projects**:
+    - ``` mkdir ~/code/projects ```
 6. Put your project files (or clone its repo) into a separate directory inside "projects" you just created.
 7. Inside the "server" directory, edit **/nginx/default/nginx.conf** and replace the dummy project name and domain with what you need. Add separate server blocks there (if needed) for different projects, and update the mappings accordingly.
 8. Set up **docker-compose.yml** from the template:
