@@ -19,7 +19,7 @@ So, I decided to improvise with Docker and create a portable, containerized dev 
 6. Put your project files (or clone its repo) into a separate directory inside "projects" you just created.
 7. Inside the "server" directory, edit **/nginx/default/nginx.conf** and replace the dummy project name and domain with what you need. Add separate server blocks there (if needed) for different projects, and update the mappings accordingly.
 8. Set up **docker-compose.yml** from the template:
-    - ``` cd ~/code ```
+    - ``` cd ~/code/server ```
     - ``` cp docker-compose-template.yml docker-composer.yml ```
 
 9. In the **docker-compose.yml**, replace the dummy project names with your project's info in the volume declaration of nginx service and of the PHP version service that the project will use.
