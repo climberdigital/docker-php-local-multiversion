@@ -1,0 +1,7 @@
+server/mysql-5-data
+server/mysql-8-data
+server/nginx/config
+server/docker-compose.yml
+nginx-proxy-manager/data
+nginx-proxy-manager/letsencrypt
+projects
