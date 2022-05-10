@@ -2,8 +2,7 @@ version: '3.8'
 
 networks:
   default:
-    external:
-      name: apps
+    name: apps
 
 services:
   nginx:
