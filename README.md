@@ -8,7 +8,7 @@ So, I decided to improvise with Docker and create a portable, containerized dev 
 ## Installation
 
 1. Make sure [Docker](https://www.docker.com/) is installed in your system.
-2. Clone this repository somewhere on your machine.
+2. Clone this repository somewhere on your machine and create a new Docker network: ```docker network create apps```.
 3. The next steps will assume that you cloned it into **~/code** on your machine. But you can use any directory you'd like.
 4. Start Nginx Proxy Manager:
     - ``` cd ~/code/nginx-proxy-manager ```
