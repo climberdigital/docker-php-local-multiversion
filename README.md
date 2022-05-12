@@ -8,7 +8,7 @@ So, I decided to improvise with Docker and create a portable, containerized dev 
 ## Installation
 
 1. Make sure [Docker](https://www.docker.com/) is installed in your system.
-2. Clone this repository somewhere on your machine and create a new Docker network: ```docker network create apps```.
+2. Clone this repository somewhere on your machine.
 3. The next steps will assume that you cloned it into **~/code** on your machine. But you can use any directory you'd like.
 4. Start Nginx Proxy Manager:
     - ``` cd ~/code/nginx-proxy-manager ```
@@ -17,13 +17,13 @@ So, I decided to improvise with Docker and create a portable, containerized dev 
 5. Create a directory called **projects**:
     - ``` mkdir ~/code/projects ```
 6. Put your project files (or clone its repo) into a separate directory inside "projects" you just created.
-7. Inside the "server" directory, edit **/nginx/default/nginx.conf** and replace the dummy project name and domain with what you need. Add separate server blocks there (if needed) for different projects, and update the mappings accordingly.
+7. Inside the "server" directory, edit **/nginx/default/nginx.conf** and replace the dummy project name and domain with whatever you need. Add separate server blocks there (if needed) for different projects, and update the mappings accordingly.
 8. Set up **docker-compose.yml** from the template:
     - ``` cd ~/code/server ```
     - ``` cp docker-compose-template.yml docker-compose.yml ```
 
 9. In the **docker-compose.yml**, replace the dummy project names with your project's info in the volume declaration of nginx service and of the PHP version service that the project will use.
-10. Build the containers for the first time:
+10. Build the containers for the first time. Docker will create the "apps" network for this environment:
     - ``` docker-compose up --build --detach ```
 11. In your browser, go to [http://127.0.0.1:81](http://127.0.0.1:81) and add a new proxy host for your project, using your machines local network IPv4 address as a destination IP and 8282 for port.
 12. Edit your system **hosts** file and add your project's local .test domain that you used in the step #7 of this guide.
