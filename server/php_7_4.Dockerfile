@@ -59,6 +59,8 @@ WORKDIR /home/dev/apps
 
 RUN chown -R www-data:www-data /home/dev/apps
 
+ADD aliases.sh /etc/profile.d/aliases.sh
+
 USER dev
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
