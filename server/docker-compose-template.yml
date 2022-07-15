@@ -6,16 +6,17 @@ networks:
 
 services:
   nginx:
-    image: nginx:1.21.6-alpine
+    image: nginx:1.23.0-alpine
     ports:
       - '8282:80'
     command: nginx -g 'daemon off;'
     volumes:
+      # load nginx config
       - ./nginx/default/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/default/php.conf:/etc/nginx/php.conf
-      - /path/to/your/projects/directory/myproject-php-8:/home/dev/apps/myproject-php-8
-      - /path/to/your/projects/directory/myproject-php-74:/home/dev/apps/myproject-php-74
-      - /path/to/your/projects/directory/myproject-php-73:/home/dev/apps/myproject-php-73
+      # mount your project's directory to make it visible for nginx
+      - ../projects/your-project:/home/dev/apps/your-project
+      # mount your system's local timezone settings (for WSL2, Linux distros)
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - php_8
@@ -26,9 +27,11 @@ services:
     image: mysql:8.0.28
     restart: unless-stopped
     tty: true
+    container_name: mysql8
     ports:
       - '33080:3306'
     volumes:
+      # mount your MySQL 8 data directory
       - ./mysql-8-data:/var/lib/mysql
     environment:
       MYSQL_USER: homestead
@@ -41,9 +44,11 @@ services:
     image: mysql:5.7.37
     restart: unless-stopped
     tty: true
+    container_name: mysql5
     ports:
       - '33057:3306'
     volumes:
+      # mount your MySQL 5.7 data directory
       - ./mysql-5-data:/var/lib/mysql
     environment:
       MYSQL_USER: homestead
@@ -56,25 +61,31 @@ services:
     build:
       context: .
       dockerfile: php_8.Dockerfile
+    container_name: php8
     restart: unless-stopped
     volumes:
-      - /path/to/your/projects/directory/myproject-php-8:/home/dev/apps/myproject-php-8
+      # mount your PHP 8.0 project directory
+      - ../projects/your-php-8-project:/home/dev/apps/your-php-8-project
       - /etc/localtime:/etc/localtime:ro
 
   php_7_4:
     build:
       context: .
       dockerfile: php_7_4.Dockerfile
+    container_name: php74
     restart: unless-stopped
     volumes:
-      - /path/to/your/projects/directory/myproject-php-74:/home/dev/apps/myproject-php-74
+      # mount your PHP 7.4 project directory
+      - ../projects/your-php-74-project:/home/dev/apps/your-php-74-project
       - /etc/localtime:/etc/localtime:ro
 
   php_7_3:
     build:
       context: .
       dockerfile: php_7_3.Dockerfile
+    container_name: php73
     restart: unless-stopped
     volumes:
-      - /path/to/your/projects/directory/myproject-php-73:/home/dev/apps/myproject-php-73
+      # mount your PHP 7.3 project directory
+      - ../projects/your-php-73-project:/home/dev/apps/your-php-73-project
       - /etc/localtime:/etc/localtime:ro
