@@ -24,6 +24,15 @@ services:
       - php_7_4
       - php_7_3
 
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+
   mysql_8:
     image: mysql:8.0.28
     restart: unless-stopped
