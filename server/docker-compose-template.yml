@@ -19,6 +19,7 @@ services:
       # mount your system's local timezone settings (for WSL2, Linux distros)
       - /etc/localtime:/etc/localtime:ro
     depends_on:
+      - php_8_1
       - php_8
       - php_7_4
       - php_7_3
@@ -56,6 +57,17 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql_5
+
+  php_8_1:
+    build:
+      context: .
+      dockerfile: php_8_1.Dockerfile
+    restart: unless-stopped
+    container_name: php81
+    volumes:
+      # mount your PHP 8.1 project directory
+      - ../projects/your-php-81-project:/home/dev/apps/your-php-81-project
+      - /etc/localtime:/etc/localtime:ro
 
   php_8:
     build:
