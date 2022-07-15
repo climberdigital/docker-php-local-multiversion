@@ -1,4 +1,4 @@
-FROM php:7.3.33-fpm-alpine
+FROM php:7.3.33-fpm-alpine3.15
 
 RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
