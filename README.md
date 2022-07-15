@@ -54,6 +54,7 @@ This environment is highly configurable, and you can add or remove services as y
 This project has a default aliases template for Laravel. It's there for reference, but, in order to use your own aliases, you need to create an **aliases.sh** file in the **server** directory, add your aliases there, and rebuild the containers via the docker-compose command, then it will import your aliases file into the PHP containers.
 
 In order for your aliases to work, you will have to run the **docker exec** command with an -l flag. Example:
+
 ``` docker exec -it php81 sh -l ```
 
 ## Reference
