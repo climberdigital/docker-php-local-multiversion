@@ -33,11 +33,14 @@ After that initial installation, you can run nginx-proxy-manager and the server 
 
 ## Database management
 
-This environment runs MySQL 5.7.37 and MySQL 8.0.28 as separate services containers, persisting data in separate volumes on the disk.
+This environment runs MySQL 5.7.37 and MySQL 8.0.28 as separate service containers, persisting data in separate volumes on the disk.
 
 If you need to access either of those with an external tool, each service exposes its own port:
 - **MySQL 5.7** exposes port **33057**
 - **MySQL 8** exposes port **33080**
+
+## Lock projects to a specific version of PHP
+Out of the box, this setup provides the ability to run PHP 7.3, PHP 7.4, PHP 8.0, and PHP 8.1 simultaneously in isolated containers. That way, you can have your projects use a specific version of PHP and run Composer commands under it. You can even set up the same projects to run on different versions of PHP in complete isolation. It's similar to Laravel Valet 3.* per-project PHP version isolation, but it offers more control and actual encapsulation, utilizing the power of a containerized environment.
 
 ## Composer
 
@@ -46,6 +49,12 @@ Each PHP version runs as a separate container, and each of these containers has 
 ## Configuration
 
 This environment is highly configurable, and you can add or remove services as you please. What I was aiming at by default is a bare-bones environment to quickly whip up and run plain PHP or Laravel projects, locally. Feel free to add Redis, Mailhog, etc. to your **docker-compose.yml** if you need it.
+
+## Aliases
+This project has a default aliases template for Laravel. It's there for reference, but, in order to use your own aliases, you need to create an **aliases.sh** file in the **server** directory, add your aliases there, and rebuild the containers via the docker-compose command, then it will import your aliases file into the PHP containers.
+
+In order for your aliases to work, you will have to run the **docker exec** command with an -l flag. Example:
+``` docker exec -it php81 sh -l ```
 
 ## Reference
 
