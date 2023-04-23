@@ -1,8 +1,6 @@
-server/mysql-5-data
-server/mysql-8-data
 server/nginx/config
+server/nginx/sites-enabled
 server/docker-compose.yml
 server/aliases.sh
-nginx-proxy-manager/data
-nginx-proxy-manager/letsencrypt
+server/volumes
 projects

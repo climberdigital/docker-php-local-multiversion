@@ -43,6 +43,8 @@ RUN chown -R www-data:www-data /home/dev/apps
 
 ADD aliases.sh /etc/profile.d/aliases.sh
 
+ADD php-config/php8/php.ini /usr/local/etc/php/php.ini
+
 USER dev
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
