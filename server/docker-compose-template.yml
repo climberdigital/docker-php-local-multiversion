@@ -8,7 +8,7 @@ services:
   nginx:
     image: nginx:1.23.0-alpine
     ports:
-      - '8282:80'
+      - '80:80'
     command: nginx -g 'daemon off;'
     volumes:
       # load nginx config
@@ -79,7 +79,7 @@ services:
     volumes:
       # mount your PHP 8.1 projects
       - ../projects/first-php-81-app:/home/dev/apps/first-php-81-app
-      - ../projects/second-php-81-app:/home/dev/apps/second-php-81-app
+      # - ../projects/second-php-81-app:/home/dev/apps/second-php-81-app
       # - ../projects/third-php-81-app:/home/dev/apps/third-php-81-app
       # - ../projects/fourth-php-81-app:/home/dev/apps/fourth-php-81-app
       - /etc/localtime:/etc/localtime:ro
@@ -93,7 +93,7 @@ services:
     volumes:
       # mount your PHP 8.0 projects
       - ../projects/first-php-8-app:/home/dev/apps/first-php-8-app
-      - ../projects/second-php-8-app:/home/dev/apps/second-php-8-app
+      # - ../projects/second-php-8-app:/home/dev/apps/second-php-8-app
       # - ../projects/third-php-8-app:/home/dev/apps/third-php-8-app
       # - ../projects/fourth-php-8-app:/home/dev/apps/fourth-php-8-app
       - /etc/localtime:/etc/localtime:ro
@@ -107,7 +107,7 @@ services:
     volumes:
       # mount your PHP 7.4 projects
       - ../projects/first-php-74-app:/home/dev/apps/first-php-74-app
-      - ../projects/second-php-74-app:/home/dev/apps/second-php-74-app
+      # - ../projects/second-php-74-app:/home/dev/apps/second-php-74-app
       # - ../projects/third-php-74-app:/home/dev/apps/third-php-74-app
       # - ../projects/fourth-php-74-app:/home/dev/apps/fourth-php-74-app
       - /etc/localtime:/etc/localtime:ro
@@ -121,7 +121,7 @@ services:
     volumes:
       # mount your PHP 7.3 projects
       - ../projects/first-php-73-app:/home/dev/apps/first-php-73-app
-      - ../projects/second-php-73-app:/home/dev/apps/second-php-73-app
+      # - ../projects/second-php-73-app:/home/dev/apps/second-php-73-app
       # - ../projects/third-php-73-app:/home/dev/apps/third-php-73-app
       # - ../projects/fourth-php-73-app:/home/dev/apps/fourth-php-73-app
       - /etc/localtime:/etc/localtime:ro
