@@ -41,6 +41,16 @@ services:
       - '8025:8025'
       - '1025:1025'
 
+  redis:
+    image: redis:7.4.4-alpine3.21
+    command: redis-server
+    container_name: redis
+    volumes:
+      - ./volumes/redis:/var/lib/redis
+      - ./volumes/redis-config:/usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+
   mysql_8:
     image: mysql:8.4.5
     restart: unless-stopped
