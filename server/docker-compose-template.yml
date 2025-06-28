@@ -20,6 +20,7 @@ services:
       # mount your system's local timezone settings (for WSL2, Linux distros)
       - /etc/localtime:/etc/localtime:ro
     depends_on:
+      - php_8_2
       - php_8_1
 
   # mailhog:
@@ -84,6 +85,18 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql_5
+
+  php_8_2:
+    build:
+      context: .
+      dockerfile: php_8_2.Dockerfile
+    restart: unless-stopped
+    container_name: php82
+    volumes:
+      # mount your PHP 8.2 projects
+      - ../projects/my-php-82-app:/home/dev/apps/my-php-82-app
+      # - ../projects/my-other-php-82-app:/home/dev/apps/my-other-php-82-app
+      - /etc/localtime:/etc/localtime:ro
 
   php_8_1:
     build:
