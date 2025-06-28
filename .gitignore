@@ -1,4 +1,5 @@
 server/nginx/config
+server/nginx/certs
 server/nginx/sites-enabled
 server/docker-compose.yml
 server/aliases.sh
