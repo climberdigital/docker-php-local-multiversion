@@ -1,12 +1,10 @@
-version: '3.8'
-
 networks:
   default:
     name: apps
 
 services:
   nginx:
-    image: nginx:1.23.0-alpine
+    image: nginx:1.29.0-alpine
     ports:
       - '80:80'
     command: nginx -g 'daemon off;'
@@ -27,17 +25,27 @@ services:
       - php_7_4
       - php_7_3
 
-  mailhog:
-    image: mailhog/mailhog
-    container_name: mailhog
-    logging:
-      driver: 'none'
+  # mailhog:
+  #   image: mailhog/mailhog
+  #   container_name: mailhog
+  #   logging:
+  #     driver: 'none'
+  #   ports:
+  #     - '1025:1025'
+  #     - '8025:8025'
+
+  mailpit:
+    image: axllent/mailpit:v1.27
+    restart: unless-stopped
+    container_name: mailpit
+    volumes:
+      - ./volumes/mailpit/data:/data
     ports:
-      - '1025:1025'
       - '8025:8025'
+      - '1025:1025'
 
   mysql_8:
-    image: mysql:8.0.28
+    image: mysql:8.4.5
     restart: unless-stopped
     tty: true
     container_name: mysql8
@@ -54,7 +62,7 @@ services:
       SERVICE_NAME: mysql_8
 
   mysql_5:
-    image: mysql:5.7.37
+    image: mysql:5.7.44
     restart: unless-stopped
     tty: true
     container_name: mysql5
