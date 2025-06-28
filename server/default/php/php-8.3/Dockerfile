@@ -1,4 +1,4 @@
-FROM php:8.4.8-fpm-alpine3.22
+FROM php:8.3.22-fpm-alpine3.22
 
 WORKDIR /home/dev/apps
 
@@ -13,8 +13,8 @@ RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     apk add --no-cache \
       bash \
       git \
-      sqlite \
       openssh \
+      sqlite \
       freetype \
       libjpeg-turbo \
       libpng \
@@ -42,9 +42,9 @@ RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
 
 COPY --from=composer:2.8.8 /usr/bin/composer /usr/bin/composer
 
-ADD aliases.sh /etc/profile.d/aliases.sh
+ADD ../../aliases.sh /etc/profile.d/aliases.sh
 
-ADD php-config/php84/php.ini /usr/local/etc/php/php.ini
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 USER dev
 
