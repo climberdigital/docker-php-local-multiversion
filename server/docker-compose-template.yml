@@ -21,9 +21,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     depends_on:
       - php_8_1
-      - php_8
-      - php_7_4
-      - php_7_3
 
   # mailhog:
   #   image: mailhog/mailhog
@@ -86,50 +83,6 @@ services:
     container_name: php81
     volumes:
       # mount your PHP 8.1 projects
-      - ../projects/first-php-81-app:/home/dev/apps/first-php-81-app
-      # - ../projects/second-php-81-app:/home/dev/apps/second-php-81-app
-      # - ../projects/third-php-81-app:/home/dev/apps/third-php-81-app
-      # - ../projects/fourth-php-81-app:/home/dev/apps/fourth-php-81-app
-      - /etc/localtime:/etc/localtime:ro
-
-  php_8:
-    build:
-      context: .
-      dockerfile: php_8.Dockerfile
-    container_name: php8
-    restart: unless-stopped
-    volumes:
-      # mount your PHP 8.0 projects
-      - ../projects/first-php-8-app:/home/dev/apps/first-php-8-app
-      # - ../projects/second-php-8-app:/home/dev/apps/second-php-8-app
-      # - ../projects/third-php-8-app:/home/dev/apps/third-php-8-app
-      # - ../projects/fourth-php-8-app:/home/dev/apps/fourth-php-8-app
-      - /etc/localtime:/etc/localtime:ro
-
-  php_7_4:
-    build:
-      context: .
-      dockerfile: php_7_4.Dockerfile
-    container_name: php74
-    restart: unless-stopped
-    volumes:
-      # mount your PHP 7.4 projects
-      - ../projects/first-php-74-app:/home/dev/apps/first-php-74-app
-      # - ../projects/second-php-74-app:/home/dev/apps/second-php-74-app
-      # - ../projects/third-php-74-app:/home/dev/apps/third-php-74-app
-      # - ../projects/fourth-php-74-app:/home/dev/apps/fourth-php-74-app
-      - /etc/localtime:/etc/localtime:ro
-
-  php_7_3:
-    build:
-      context: .
-      dockerfile: php_7_3.Dockerfile
-    container_name: php73
-    restart: unless-stopped
-    volumes:
-      # mount your PHP 7.3 projects
-      - ../projects/first-php-73-app:/home/dev/apps/first-php-73-app
-      # - ../projects/second-php-73-app:/home/dev/apps/second-php-73-app
-      # - ../projects/third-php-73-app:/home/dev/apps/third-php-73-app
-      # - ../projects/fourth-php-73-app:/home/dev/apps/fourth-php-73-app
+      - ../projects/my-php-81-app:/home/dev/apps/my-php-81-app
+      # - ../projects/my-other-php-81-app:/home/dev/apps/my-other-php-81-app
       - /etc/localtime:/etc/localtime:ro

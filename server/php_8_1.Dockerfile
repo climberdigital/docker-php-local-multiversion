@@ -1,46 +1,45 @@
-FROM php:8.1.8RC1-fpm-alpine3.15
+FROM php:8.1.32-fpm-alpine3.20
 
-RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+WORKDIR /home/dev/apps
 
-RUN addgroup -g 1000 dev
-RUN adduser -u 1000 -G dev -h /home/dev -D dev
-
-RUN sed -i "s/user = www-data/user = dev/g" /usr/local/etc/php-fpm.d/www.conf
-RUN sed -i "s/group = www-data/group = dev/g" /usr/local/etc/php-fpm.d/www.conf
-RUN echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN docker-php-ext-install pdo pdo_mysql
-
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git openssh
-
-RUN apk add --no-cache \
+RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    addgroup -g 1000 dev && \
+    adduser -u 1000 -G dev -h /home/dev -D dev && \
+    sed -i "s/user = www-data/user = dev/g" /usr/local/etc/php-fpm.d/www.conf && \
+    sed -i "s/group = www-data/group = dev/g" /usr/local/etc/php-fpm.d/www.conf && \
+    echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf && \
+    apk update && apk upgrade && \
+    apk add --no-cache \
+      bash \
+      git \
+      openssh \
       freetype \
+      sqlite \
       libjpeg-turbo \
       libpng \
       freetype-dev \
       libjpeg-turbo-dev \
       libpng-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-enable gd \
-    && apk del --no-cache \
+      zip \
+      libzip-dev && \
+    docker-php-ext-install pdo pdo_mysql mysqli && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install -j$(nproc) gd && \
+    docker-php-ext-enable gd && \
+    docker-php-ext-configure zip && \
+    docker-php-ext-install zip && \
+    docker-php-ext-install exif && \
+    apk add --no-cache pcre-dev ${PHPIZE_DEPS} && \
+    pecl install redis && \
+    docker-php-ext-enable redis && \
+    apk del --no-cache \
       freetype-dev \
       libjpeg-turbo-dev \
-      libpng-dev \
-    && rm -rf /tmp/*
+      libpng-dev && \
+    rm -rf /tmp/* && \
+    rm -rf /var/cache/apk/*
 
-RUN apk add --no-cache zip libzip-dev
-RUN docker-php-ext-configure zip
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install exif
-RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} && pecl install redis && docker-php-ext-enable redis
-
-WORKDIR /home/dev/apps
-
-RUN chown -R www-data:www-data /home/dev/apps
+COPY --from=composer:2.2.25 /usr/bin/composer /usr/bin/composer
 
 ADD aliases.sh /etc/profile.d/aliases.sh
 
