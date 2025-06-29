@@ -41,9 +41,9 @@ RUN echo "dev ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
 
 COPY --from=composer:2.2.25 /usr/bin/composer /usr/bin/composer
 
-ADD ../../aliases.sh /etc/profile.d/aliases.sh
+ADD ./aliases.sh /etc/profile.d/aliases.sh
 
-ADD ./php.ini /usr/local/etc/php/php.ini
+ADD ./php/php-8.1/php.ini /usr/local/etc/php/php.ini
 
 USER dev
 
