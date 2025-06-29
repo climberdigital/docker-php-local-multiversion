@@ -5,7 +5,6 @@ if [ -d "local" ]; then
   exit 1
 fi
 
-# Example using a here-document to execute a block of commands
 bash << EOF
 echo "Copying defaults into a gitignored local directory..."
 cp -r ./default ./local
